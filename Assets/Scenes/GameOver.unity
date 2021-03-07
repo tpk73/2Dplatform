@@ -487,7 +487,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Press "R" to Restart
+  m_Text: Tap Screen to Restart
 --- !u!222 &616004483
 CanvasRenderer:
   m_ObjectHideFlags: 0

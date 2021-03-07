@@ -245,10 +245,11 @@ MonoBehaviour:
   moveSpeed: 7
   jumpForce: 125
   isGrounded: 0
-  bulletForce: 50
+  bulletForce: 200
   spawnPoint: {fileID: 1650092211859718918}
   energyBall: {fileID: 5156476732419367119, guid: 988b67ec94a64964a8844b750d97fc7a, type: 3}
   fireForward: 1
+  joyStick: {fileID: 0}
 --- !u!1 &7223863641011082680
 GameObject:
   m_ObjectHideFlags: 0
