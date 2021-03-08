@@ -9,6 +9,7 @@ TagManager:
   - pointA
   - pointB
   - BadGuy
+  - restart
   layers:
   - Default
   - TransparentFX

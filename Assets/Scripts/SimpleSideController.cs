@@ -2,26 +2,23 @@
 
 public class SimpleSideController : MonoBehaviour
 {
-    float horizontalMove = 0f;
-    float verticalMove = 0f;
-    public float moveSpeed = 10.0f;
+    Rigidbody2D blahblah;
+    SpriteRenderer spriteRenderer;
+    Animator animator;
 
-    public float jumpForce = 300.0f;
+    public Joystick joyStick;
+
+    public float moveSpeed = 10.0f;
 
     public bool isGrounded = true;
 
+    public float jumpForce = 300.0f;
     public float bulletForce = 50.0f;
-
-    Rigidbody2D blahblah;
-
-    Animator animator;
-
-    SpriteRenderer spriteRenderer;
 
     public GameObject spawnPoint;
     public GameObject energyBall;
     public bool fireForward = true;
-    public Joystick joyStick;
+    
 
     // Start is called before the first frame update
     void Start() {
@@ -31,9 +28,72 @@ public class SimpleSideController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update() {
+    void Update()
+    {
+        float horizontalMove = joyStick.Horizontal * moveSpeed;
 
+        if (joyStick.Horizontal >= .2f)
+        {
+            horizontalMove = moveSpeed;
+            transform.Translate(new Vector3(horizontalMove, 0, 0) * moveSpeed * Time.deltaTime);
+            animator.SetBool("isRunning", true);
+            spriteRenderer.flipX = false;
+            fireForward = true;
+        } 
+        else if (joyStick.Horizontal <= -.2f)
+        {
+            horizontalMove = -moveSpeed;
+            transform.Translate(new Vector3(horizontalMove, 0, 0) * moveSpeed * Time.deltaTime);
+            animator.SetBool("isRunning", true);
+            spriteRenderer.flipX = true;
+            fireForward = false;
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);
+            horizontalMove = 0f;
+        }
+
+        float verticalMove = joyStick.Vertical;
+
+        if ((verticalMove >= .6f) && isGrounded)
+        {
+            animator.SetBool("isJumping", true);
+            blahblah.AddForce(transform.up * jumpForce);
+        }
+    }
+    /*
+    public void moveRight()
+    {
+        float horizontalInput = joyStick.Horizontal;
+
+        if (joyStick.Horizontal >= .2f)
+        {
+            transform.Translate(new Vector3(horizontalInput, 0, 0) * moveSpeed * Time.deltaTime);
+            horizontalMove = moveSpeed;
+            animator.SetBool("isRunning", true);
+            spriteRenderer.flipX = false;
+            fireForward = true;
+        }
+    }
+
+    public void moveLeft()
+    {
+        float horizontalInput = joyStick.Horizontal;
+
+        if (joyStick.Horizontal <= -.2f)
+        {
+            transform.Translate(new Vector3(horizontalInput, 0, 0) * moveSpeed * Time.deltaTime);
+            horizontalMove = -moveSpeed;
+            animator.SetBool("isRunning", true);
+            spriteRenderer.flipX = true;
+            fireForward = false;
+        }
+    }
+    
+    // Update is called once per frame
+    //void Update() {
+        /*
         // What Moves Us
         float horizontalInput = joyStick.Horizontal;
         //Get the value of the Horizontal input axis.
@@ -62,9 +122,9 @@ public class SimpleSideController : MonoBehaviour
 
         //transform.Translate(new Vector3(horizontalInput, 0, 0) * moveSpeed * Time.deltaTime);
 
-        float verticalInput = joyStick.Vertical;
+        //float verticalInput = joyStick.Vertical;
 
-        if (verticalMove >= .6f)
+       // if (verticalMove >= .6f)
         {
             //isGrounded = true;
             //animator.SetBool("isJumping", true);
@@ -75,7 +135,7 @@ public class SimpleSideController : MonoBehaviour
         transform.Translate(new Vector3(horizontalInput, 0, 0) * moveSpeed * Time.deltaTime);
 
     }
-
+   */
     void FixedUpdate() {
 
        /* if (Input.GetButton("Jump") && isGrounded) {

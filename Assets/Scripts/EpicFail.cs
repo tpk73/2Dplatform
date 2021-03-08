@@ -9,6 +9,7 @@ public class EpicFail : MonoBehaviour
     {
         manny = GameObject.FindGameObjectWithTag("MrManager").GetComponent<GameManager>();
     }
+
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player") 
@@ -22,7 +23,7 @@ public class EpicFail : MonoBehaviour
             if(manny.numLivesLeft < 0)
             {
                 //load game over scene
-                SceneManager.LoadScene("GameOver");
+                SceneManager.LoadScene("Lvl1");
             }
             else
             {

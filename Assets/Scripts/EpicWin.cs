@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class EpicWin : MonoBehaviour
@@ -14,6 +16,13 @@ public class EpicWin : MonoBehaviour
             // use SceneManager to load the NEXT scene!  Add one to the current scene #
             // the LoadScene function just wants a NUMBER of the scene to load
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else if (SceneManager.GetActiveScene().name == "GameOver")
+        {
+            if (Input.GetButtonDown("Fire1"))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
         }
     }
 }
